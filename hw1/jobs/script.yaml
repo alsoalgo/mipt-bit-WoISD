@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: script-cronjob
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: script-cronjob
+        spec:
+          containers:
+          - name: script
+            image: script-image:latest
+            imagePullPolicy: Never
+            volumeMounts:
+            - name: shared-memory
+              mountPath: /shared
+          restartPolicy: Never
+          volumes:
+          - name: shared-memory
+            emptyDir: {}

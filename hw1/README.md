@@ -26,11 +26,11 @@
 - Запускает `./run.sh` (возможно, для запуска потребуется прописать `chmod +x run.sh`) - скрипт, который собирает все образы и накатывает настройки на кластер. 
 
 Для проверки, что всё корректно работает, помимо запуска `./refresh.sh`, надо после действий выше отдельно произвести следующие шаги (находясь в этой же директории):
-- `kubectl get po` - получаем список подов, их состояния
-- `kubectl describe pod webapp-deployment-**hash**`:  проверяем, что всё работает
-- `kubectl logs script-deployment-**hash** -c script` - видим, что curl запросы происходят
+- `kubectl get pods` - получаем список подов, их состояния
+- `kubectl get cronjobs` - получаем список cron job, их состояния
+- `kubectl get jobs` - получаем список сработавших job'ов, их состояния
+- `kubectl describe pod webapp-deployment-**hash**` -  проверяем, что всё работает
+- `kubectl logs script-cronjob-**hash** -c script` - видим, что curl запросы происходят (видно классический лог curl'а, ошибок нет)
 - `minikube service webapp` - создается туннель для удобного доступа к приложению, здесь мы ожидаем `404 page not found` в открывающемся браузере (так как у нас нет endpoint'а `/`)
 - Нас интересует endpoint `/time` - дописываем его в строку поиска, должны увидеть что-то вроде `Mon, 13 May 2024 13:40:27 UTC`
 - Аналогично можем зайти на endpoint `/statistics`
-- Копируем с пода наш лог-файл `kubectl cp script-deployment-**hash**:statistics.log ./statistics.log`
-- Видим, что всё работает (`cat statistics.log`)

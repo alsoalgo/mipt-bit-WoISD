@@ -1,8 +1,5 @@
 #!/bin/bash
 
+curl http://webapp:8080/statistics >> /shared/statistics.log
+echo "" >> /shared/statistics.log
 
-while true; do
-  curl http://webapp:8080/statistics >> statistics.log
-  echo "" >> statistics.log
-  sleep 5
-done

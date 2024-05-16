@@ -6,6 +6,6 @@ docker build -t script-image:latest ./script
 kubectl create -f services/webapp.yaml
 
 kubectl create -f deployments/webapp.yaml 
-kubectl create -f deployments/script.yaml
+kubectl create -f jobs/script.yaml
 
 minikube tunnel
