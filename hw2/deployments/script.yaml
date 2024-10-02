@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: script-deployment
+  labels:
+    app: script-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: script-deployment
+  template:
+    metadata:
+      labels:
+        app: script-deployment
+    spec:
+      containers:
+      - name: script
+        image: script-image:latest
+        imagePullPolicy: Never
+        
+
